@@ -1,0 +1,147 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="First_aid.aids"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="mystyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+            <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
+            <Setter Property="SelectionBackground" Value="{StaticResource PhoneAccentBrush}"/>
+            <Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="MainBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="MainBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="MainBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="MainBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}"/>
+                            <Border x:Name="ReadonlyBorder" BorderBrush="{StaticResource PhoneDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed"/>
+                            <Border BorderBrush="LightBlue" BorderThickness="{TemplateBinding BorderThickness}"  Margin="{StaticResource PhoneTouchTargetOverhang}">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.7"/>
+                                </Border.Background>
+                                <ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/18578.jpg"/>
+        </Grid.Background>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- LOCALIZATION NOTE:
+            To localize the displayed strings copy their values to appropriately named
+            keys in the app's neutral language resource file (AppResources.resx) then
+            replace the hard-coded text value between the attributes' quotation marks
+            with the binding clause whose path points to that string name.
+
+            For example:
+
+                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
+
+            This binding points to the template's string resource named "ApplicationTitle".
+
+            Adding supported languages in the Project Properties tab will create a
+            new resx file per language that can carry the translated values of your
+            UI strings. The binding in these examples will cause the value of the
+            attributes to be drawn from the .resx file that matches the
+            CurrentUICulture of the app at run time.
+         -->
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="First Aid" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="#FF322F2F"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBox x:Name="tx1" TextWrapping="Wrap" Text="1. First aid for someone who's unconscious and not breathing" Tap="tx1_Tap" Style="{StaticResource mystyle}" IsReadOnly="True" />
+                    <TextBox x:Name="tx01" TextWrapping="Wrap" Text="2. First aid for choking" IsReadOnly="True" Tap="tx01_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx2" TextWrapping="Wrap" Text="3 .First aid for someone who's unconscious and breathing" IsReadOnly="True" Tap="tx2_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx3" TextWrapping="Wrap" Text="4. First aid for someone who's bleeding heavily" IsReadOnly="True" Tap="tx3_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx5" TextWrapping="Wrap" Text="5. First aid for burns" IsReadOnly="True" Tap="tx5_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx6" TextWrapping="Wrap" Text="6. First aid for a broken bone" IsReadOnly="True" Tap="tx6_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx7" TextWrapping="Wrap" Text="7. First aid for a heart attack" IsReadOnly="True" Tap="tx7_Tap_1" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx05" TextWrapping="Wrap" Text="8. First aid for a stroke" IsReadOnly="True" Tap="tx7_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx02" TextWrapping="Wrap" Text="9. First aid for seizures (epilepsy)" IsReadOnly="True" Tap="tx02_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx03" TextWrapping="Wrap" Text="10. First aid for a diabetic emergency" IsReadOnly="True" Tap="tx03_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx8" TextWrapping="Wrap" Text="11. First aid for an asthma attack" IsReadOnly="True" Tap="tx8_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx4" TextWrapping="Wrap" Text="12. First aid for poisoning and harmful substances" IsReadOnly="True" Tap="tx4_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx9" TextWrapping="Wrap" Text="13. First aid for a head injury" IsReadOnly="True" Tap="tx9_Tap" Style="{StaticResource mystyle}" />
+                    <TextBox x:Name="tx10" TextWrapping="Wrap" Text="14. First aid for someone who's distressed" IsReadOnly="True" Tap="tx10_Tap" Style="{StaticResource mystyle}" />
+                    </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+        <!--Uncomment to see an alignment grid to help ensure your controls are
+            aligned on common boundaries.  The image has a top margin of -32px to
+            account for the System Tray. Set this to 0 (or remove the margin altogether)
+            if the System Tray is hidden.
+
+            Before shipping remove this XAML and the image itself.-->
+        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+    </Grid>
+
+</phone:PhoneApplicationPage>
